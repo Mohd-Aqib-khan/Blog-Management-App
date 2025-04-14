@@ -20,6 +20,9 @@ const AppDataSource = new DataSource({
 const seedPosts = async () => {
   await AppDataSource.initialize();
 
+  // ✅ RUN MIGRATIONS BEFORE SEEDING
+  await AppDataSource.runMigrations();
+
   const userRepo = AppDataSource.getRepository(User);
   const postRepo = AppDataSource.getRepository(Post);
 
