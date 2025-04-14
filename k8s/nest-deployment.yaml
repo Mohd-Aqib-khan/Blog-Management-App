@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nest-backend
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nest-backend
+  template:
+    metadata:
+      labels:
+        app: nest-backend
+    spec:
+      containers:
+        - name: nest-backend
+          image: techaqib/nest-backend:latest
+          ports:
+            - containerPort: 5000
+          env:
+            - name: POSTGRES_HOST
+              value: postgres-service
+            - name: POSTGRES_PORT
+              value: "5432"
+            - name: POSTGRES_USER
+              value: postgres
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: password
+            - name: POSTGRES_DB
+              value: demo-blog-db
+            - name: JWT_SECRET
+              value: c3V1Y2hpZ3JpZHN1cGVyYWRtaW5vbmU=
+            - name: JWT_EXPIRES_IN
+              value: 3600s
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nest-service
+  namespace: default
+spec:
+  type: NodePort  # ✅ Change this from ClusterIP
+  selector:
+    app: nest-backend
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000
+      nodePort: 30081
