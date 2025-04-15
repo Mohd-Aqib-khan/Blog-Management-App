@@ -362,20 +362,20 @@ minikube start
 
 Deploy PostgreSQL
 ```
-kubectl apply -f k8s/postgres-deployment.yaml
+kubectl apply -f ./k8s/postgres-deployment.yaml
 
 ```
 
 Step 5: Deploy Backend
 ```
-kubectl apply -f k8s/nest-deployment.yaml
+kubectl apply -f ./k8s/nest-deployment.yaml
 
 ```
 
 Step 6: Deploy Frontend
 
 ```
-kubectl apply -f k8s/angular-deployment.yaml
+kubectl apply -f ./k8s/angular-deployment.yaml
 ```
 
 Step 7: Open the application
