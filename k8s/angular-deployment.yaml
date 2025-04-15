@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: angular
-          image: techaqib/angularblog:latest
+          image: techaqib/angularblog:v1.0.0
           imagePullPolicy: Always
           ports:
             - containerPort: 80
