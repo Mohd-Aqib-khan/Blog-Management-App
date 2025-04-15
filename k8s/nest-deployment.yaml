@@ -16,6 +16,7 @@ spec:
       containers:
         - name: nest-backend
           image: techaqib/nest-backend:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 5000
           env:
